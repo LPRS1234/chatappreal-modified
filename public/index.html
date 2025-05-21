@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Wordle 6x4 + 사자성어 퀴즈</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 사자성어 뜻 -->
+  <section style="max-width:420px; margin:32px auto 36px auto; border:1px solid #bcd; border-radius:10px; background:#f9fafb; padding:18px;">
+    <!--<h2 style="font-size:1.2em;">뜻에 맞는 사자성어를 6번 안에 맞혀보세요!</h2>-->
+    <div id="quiz-meaning" style="font-size:1.09em; font-weight:bold; margin-bottom:0.5em;"></div>
+    <button id="next-btn" style="display:none; margin-top:8px;">다음 문제</button>
+  </section>
+
+  <!-- 워들 6줄 4칸 입력 UI -->
+  <div class="game-board" id="board">
+    <div class="wordle-row" data-row="0">
+      <span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span>
+    </div>
+    <div class="wordle-row" data-row="1">
+      <span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span>
+    </div>
+    <div class="wordle-row" data-row="2">
+      <span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span>
+    </div>
+    <div class="wordle-row" data-row="3">
+      <span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span>
+    </div>
+    <div class="wordle-row" data-row="4">
+      <span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span>
+    </div>
+    <div class="wordle-row" data-row="5">
+      <span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span><span class="wordle-box"></span>
+    </div>
+    <!-- 숨겨진 input은 script.js에서 자동 생성 -->
+  </div>
+
+  <!-- 피드백 영역 -->
+  <div style="max-width:420px;margin:16px auto 0 auto" id="result">
+    <div id="result-msg" style="font-size:1.08em;"></div>
+    <div id="example-msg" style="color:#686;font-size:0.98em;"></div>
+  </div>
+
+  <!-- 사자성어 뜻 영역(section) 부분에 힌트 버튼/팁 표시 div 추가 -->
+<section style="max-width:420px; margin:32px auto 36px auto; border:1px solid #bcd; border-radius:10px; background:#f9fafb; padding:18px;">
+    <div id="quiz-meaning" style="font-size:1.09em; font-weight:bold; margin-bottom:0.5em;"></div>
+    <button id="hint-btn" style="margin-top:4px;margin-bottom:8px;">힌트 보기</button>
+    <div id="hint-area" style="margin-top:4px; font-size:1.05em; font-weight:bold; color:#245; min-height:1.3em;"></div>
+    <button id="next-btn" style="display:none; margin-top:8px;">다음 문제</button>
+  </section>
+
+  <script src="idioms.js"></script>
+  <script src="script.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>

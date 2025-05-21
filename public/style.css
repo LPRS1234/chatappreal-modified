@@ -1,0 +1,90 @@
+body { background:#eee; min-height:100vh;}
+.game-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  max-width: 320px;
+  margin: 50px auto;
+  margin-bottom: 0;
+}
+.wordle-row {
+  display: flex;
+  gap: 0.5em;
+  position: relative;
+}
+.wordle-box {
+  width: 2.5em;
+  height: 2.5em;
+  border: 2px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-family: inherit;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s;
+}
+.wordle-box.active {
+  border-color: #4285f4;
+}
+.wordle-box.filled {
+  border-color: #bbb;
+}
+.hidden-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}
+.wordle-row.active {
+  cursor: text;
+}
+
+.wordle-box.correct {
+    background: #6aaa64; /* 초록 */
+    color: #fff;
+    border-color: #6aaa64;
+}
+.wordle-box.present {
+    background: #c9b458; /* 노랑 */
+    color: #fff;
+    border-color: #c9b458;
+}
+.wordle-box.absent {
+    background: #787c7e; /* 회색 */
+    color: #fff;
+    border-color: #787c7e;
+}
+
+#next-btn {
+    font-size: 15px;
+    border-radius: 12px;
+    border: none;
+    background-color: rgb(155, 155, 155);
+    color: white;
+    padding: 10px 15px;
+}
+
+#next-btn:hover {
+    cursor: pointer;
+}
+
+#hint-btn {
+  border-radius: 12px;
+  padding: 5px 20px;
+  border: none;
+  background-color: rgba(0,0,0, 0.2)
+}
+
+#hint-btn:hover {
+  cursor: pointer;
+}
+
+#result {
+  font-size: 20px;
+  border: 3px solid rgba(0,0,0, 0.4);
+  padding: 10px 30px;
+  border-radius: 12px;
+}
