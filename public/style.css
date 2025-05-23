@@ -4,8 +4,10 @@ body { background:#eee; min-height:100vh;}
   flex-direction: column;
   gap: 0.7em;
   max-width: 320px;
-  margin: 50px auto;
+  margin: auto auto;
   margin-bottom: 0;
+  position: relative;
+  padding: 0px 500px;
 }
 .wordle-row {
   display: flex;
@@ -87,4 +89,29 @@ body { background:#eee; min-height:100vh;}
   border: 3px solid rgba(0,0,0, 0.4);
   padding: 10px 30px;
   border-radius: 12px;
+}
+
+.game_des {
+  position: absolute;
+  right: 10px;
+  font-size: 25px;
+}
+
+.yellow {
+  background-color: #CAB458;
+}
+
+.green {
+  background-color: #6BAA64;
+}
+
+.grey {
+  background-color: #787C7E;
+}
+
+.green, .yellow, .grey {
+  display: inline-block;
+  padding: 0.1em 0.4em;
+  border-radius: 5px;
+  color: white;
 }
