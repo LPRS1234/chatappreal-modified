@@ -4,18 +4,28 @@ let gameCount = 0;
 
 let usedIdxs = [];
 
+let correct = 0;
+let wrong = 0;
+
 let currentQuiz = null;
 let isQuizActive = true;
+let isGameActive = true;
 
 const meaningElem = document.getElementById('quiz-meaning');
 const resultElem = document.getElementById('result-msg');
 const exampleElem = document.getElementById('example-msg');
 const nextBtn = document.getElementById('next-btn');
+const competition = document.getElementById('vsai');
+
+let time = 5;
+
 
 // 새 문제 출제
 function newQuiz() {
+  time = 5;
+  isGameActive = true;
   resultElem.textContent = '';
-  exampleElem.textContent = '';
+  exampleElem.textContent = ''; 
   if (window.clearHint) clearHint();
 
   // 5문제 풀었으면 종료
@@ -23,8 +33,23 @@ function newQuiz() {
     meaningElem.textContent = `게임 종료! ${MAX_GAME_COUNT}문제를 모두 풀었습니다 😊`;
     nextBtn.style.display = "none";
     isQuizActive = false;
+
     // "다시 시작"을 표시하고 싶은 경우 아래처럼...
-    nextBtn.textContent = "다시 시작"; nextBtn.style.display = "inline-block";
+    nextBtn.textContent = "다시 시작";
+    nextBtn.style.display = "inline-block";
+    isGameActive = false
+    resultElem.innerHTML = `맞춘것: ${correct}개, 틀린것: ${wrong}개`
+
+    if (correct >= 3) {
+      competition.innerText = "축하합니다! AI와의 대결에서 승리하였습니다!";
+      competition.style.color = "green";
+    } else {
+      competition.innerText = "AI와의 대결에서 패배하였습니다...";
+      competition.style.color = "red";
+    }
+
+    correct = 0;
+    wrong = 0;
     return;
   }
   // 문제 카운트 증가
@@ -62,10 +87,12 @@ function checkQuizAnswer(answer) {
 
   if (answer === currentQuiz.word) {
     // 정답
+    correct++
     resultElem.textContent = "정답입니다! 🎉";
     resultElem.style.color = "green";
     exampleElem.textContent = "예문: " + currentQuiz.example;
     isQuizActive = false;
+    isGameActive = false;
     nextBtn.style.display = "inline-block";
     return { correct: true, done: true };
   } else {
@@ -78,22 +105,48 @@ function checkQuizAnswer(answer) {
 // 마지막 시도(6번)까지 실패시 호출
 function showQuizFail() {
   if (currentQuiz) {
+    if (!isQuizActive) return;  
     resultElem.textContent = "오답입니다. 정답: " + currentQuiz.word;
     resultElem.style.color = "red";
     exampleElem.textContent = "예문: " + currentQuiz.example;
+    wrong++
     isQuizActive = false;
+    isGameActive = false;
     nextBtn.style.display = "inline-block";
   }
+}
+
+const timer = document.querySelector('.timer');
+
+function decTime() {
+    if (time >= 0 && isGameActive == true) {
+        timer.innerText = `${time}s`
+        time--;
+    } else if (time < 0 && isGameActive == true && isQuizActive == true) {
+        resultElem.innerText = "시간 초과! 정답: " + currentQuiz.word;
+        resultElem.style.color = "red";
+        exampleElem.innerText = `예문: ${currentQuiz.example}`
+        isQuizActive = false;
+        isGameActive = false;
+        nextBtn.style.display = "inline-block"
+        wrong++ 
+    }
+}
+
+if(isGameActive == true) {
+  setInterval(decTime, 1000)
 }
 
 nextBtn.onclick = function(){
   // 5문제가 끝난 후라면? → 카운트 및 버튼 문구 리셋
   if (gameCount >= MAX_GAME_COUNT) {
     gameCount = 0;
+    competition.innerText="";
     usedIdxs = []; // ← 여기에 꼭 초기화!
     nextBtn.textContent = "다음 문제";
   } else {
     gameCount++;
+    isGameActive = false
   }
   // 새 문제 출제 + 워들 UI 리셋 (script.js에서 resetBoard 함수 제공)
   newQuiz();

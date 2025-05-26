@@ -117,6 +117,12 @@ body { background:#eee; min-height:100vh;}
   color: white;
 }
 
+.timer {
+  font-size: 30px;
+  text-align: center;
+  margin: 32px;
+}
+
 @media screen and (max-width: 768px) {
   .game_des {
     position: static;
