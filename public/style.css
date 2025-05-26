@@ -117,7 +117,7 @@ body { background:#eee; min-height:100vh;}
   color: white;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   .game_des {
     position: static;
     width: auto;
