@@ -17,12 +17,12 @@ const exampleElem = document.getElementById('example-msg');
 const nextBtn = document.getElementById('next-btn');
 const competition = document.getElementById('vsai');
 
-let time = 5;
+let time = 30;
 
 
 // 새 문제 출제
 function newQuiz() {
-  time = 5;
+  time = 30;
   isGameActive = true;
   resultElem.textContent = '';
   exampleElem.textContent = ''; 
