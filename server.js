@@ -47,8 +47,12 @@ app.post("/check-answer", async (req, res) => {
 });
 
 // 🔽 모든 기타 요청은 index.html로 fallback (SPA 대응용)
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
+app.get("/quiz", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/quiz.html"));
 });
 
 const PORT = process.env.PORT || 3000;

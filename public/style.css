@@ -89,6 +89,7 @@ body { background:#eee; min-height:100vh;}
   border: 3px solid rgba(0,0,0, 0.4);
   padding: 10px 30px;
   border-radius: 12px;
+  display: none;
 }
 
 .game_des {
@@ -119,7 +120,6 @@ body { background:#eee; min-height:100vh;}
 
 .timer {
   font-size: 30px;
-  text-align: center;
   margin: 32px;
 }
 
@@ -130,4 +130,8 @@ body { background:#eee; min-height:100vh;}
     margin-top: 1em;
     text-align: center;
   }
+}
+
+.nav {
+  text-align: center;
 }

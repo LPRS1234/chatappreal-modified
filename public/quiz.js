@@ -16,6 +16,8 @@ const resultElem = document.getElementById('result-msg');
 const exampleElem = document.getElementById('example-msg');
 const nextBtn = document.getElementById('next-btn');
 const competition = document.getElementById('vsai');
+const corrects = document.querySelector(".correct");
+const wrongs = document.querySelector('.wrong');
 
 let time = 30;
 
@@ -27,7 +29,11 @@ function newQuiz() {
   resultElem.textContent = '';
   exampleElem.textContent = ''; 
   if (window.clearHint) clearHint();
-
+  
+  // ✅ 게임이 계속되는 경우에만 숨김
+  if (gameCount < MAX_GAME_COUNT) {
+    document.getElementById("result").style.display = "none";
+  }
   // 5문제 풀었으면 종료
   if (gameCount >= MAX_GAME_COUNT) {
     meaningElem.textContent = `게임 종료! ${MAX_GAME_COUNT}문제를 모두 풀었습니다 😊`;
@@ -39,7 +45,6 @@ function newQuiz() {
     nextBtn.style.display = "inline-block";
     isGameActive = false
     resultElem.innerHTML = `맞춘것: ${correct}개, 틀린것: ${wrong}개`
-
     if (correct >= 3) {
       competition.innerText = "축하합니다! AI와의 대결에서 승리하였습니다!";
       competition.style.color = "green";
@@ -71,7 +76,7 @@ function newQuiz() {
   currentQuiz = random;
 
   // 문제(뜻) 표시
-  meaningElem.textContent = `[${gameCount} / ${MAX_GAME_COUNT}] ${random.meaning}`;
+  meaningElem.textContent = `문항 수 : [${gameCount} / ${MAX_GAME_COUNT}] ${random.meaning}`;
   isQuizActive = true;
   nextBtn.style.display = "none";
 
@@ -88,12 +93,15 @@ function checkQuizAnswer(answer) {
   if (answer === currentQuiz.word) {
     // 정답
     correct++
+    corrects.innerText = `맞춘것: ${correct}개`
     resultElem.textContent = "정답입니다! 🎉";
     resultElem.style.color = "green";
     exampleElem.textContent = "예문: " + currentQuiz.example;
     isQuizActive = false;
     isGameActive = false;
     nextBtn.style.display = "inline-block";
+    // ✅ 결과창 보이기
+    document.getElementById("result").style.display = "block";
     return { correct: true, done: true };
   } else {
     // 오답
@@ -109,10 +117,13 @@ function showQuizFail() {
     resultElem.textContent = "오답입니다. 정답: " + currentQuiz.word;
     resultElem.style.color = "red";
     exampleElem.textContent = "예문: " + currentQuiz.example;
+    // ✅ 결과창 보이기
+    document.getElementById("result").style.display = "block";
     wrong++
     isQuizActive = false;
     isGameActive = false;
     nextBtn.style.display = "inline-block";
+    wrongs.innerText = `틀린것: ${wrong}개`
   }
 }
 
@@ -130,6 +141,7 @@ function decTime() {
         isGameActive = false;
         nextBtn.style.display = "inline-block"
         wrong++ 
+        wrongs.innerText = `틀린것: ${wrong}개`
     }
 }
 
