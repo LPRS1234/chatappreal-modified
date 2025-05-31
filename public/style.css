@@ -123,15 +123,12 @@ body { background:#eee; min-height:100vh;}
   margin: 32px;
 }
 
-@media screen and (max-width: 768px) {
-  .game_des {
-    position: static;
-    width: auto;
-    margin-top: 1em;
-    text-align: center;
-  }
-}
-
 .nav {
   text-align: center;
+}
+
+@media (max-width: 767px) {
+  .game_des {
+    display: none;
+  }
 }
