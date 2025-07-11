@@ -77,7 +77,7 @@ function newQuiz() {
   const random = idioms[randIdx];
   currentQuiz = random;
 
-  meaningElem.textContent = `문항 수 : [${gameCount} / ${MAX_GAME_COUNT}] ${random.meaning}`;
+  meaningElem.textContent = `문제 수 : [${gameCount+1} / ${MAX_GAME_COUNT}] ${random.meaning}`;
   isQuizActive = true;
   nextBtn.style.display = "none";
 
